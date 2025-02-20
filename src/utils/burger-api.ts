@@ -6,7 +6,7 @@ const URL = process.env.BURGER_API_URL;
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
-type TServerResponse<T> = {
+export type TServerResponse<T> = {
   success: boolean;
 } & T;
 
@@ -61,13 +61,13 @@ type TIngredientsResponse = TServerResponse<{
   data: TIngredient[];
 }>;
 
-type TFeedsResponse = TServerResponse<{
+export type TFeedsResponse = TServerResponse<{
   orders: TOrder[];
   total: number;
   totalToday: number;
 }>;
 
-type TOrdersResponse = TServerResponse<{
+export type TOrdersResponse = TServerResponse<{
   data: TOrder[];
 }>;
 
@@ -119,7 +119,7 @@ export const orderBurgerApi = (data: string[]) =>
     return Promise.reject(data);
   });
 
-type TOrderResponse = TServerResponse<{
+export type TOrderResponse = TServerResponse<{
   orders: TOrder[];
 }>;
 
@@ -137,7 +137,7 @@ export type TRegisterData = {
   password: string;
 };
 
-type TAuthResponse = TServerResponse<{
+export type TAuthResponse = TServerResponse<{
   refreshToken: string;
   accessToken: string;
   user: TUser;
@@ -223,13 +223,38 @@ export const updateUserApi = (user: Partial<TRegisterData>) =>
     body: JSON.stringify(user)
   });
 
-export const logoutApi = () =>
-  fetch(`${URL}/auth/logout`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
-    })
-  }).then((res) => checkResponse<TServerResponse<{}>>(res));
+// Функция для выхода пользователя из системы
+export const logoutApi = async () => {
+  // Извлекаем refreshToken из localStorage для выполнения запроса
+  const refreshToken = localStorage.getItem('refreshToken');
+
+  // Если refreshToken отсутствует, выводим ошибку в консоль и выбрасываем исключение
+  if (!refreshToken) {
+    console.error('No refresh token found. User is not logged in.');
+    throw new Error('Token required'); // Выбрасываем ошибку, если токен не найден
+  }
+
+  try {
+    // Отправляем запрос на сервер для завершения сессии пользователя
+    const response = await fetch(`${URL}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({
+        token: refreshToken // Передаем refreshToken в теле запроса
+      })
+    });
+
+    // Проверяем ответ от сервера на успешность выполнения операции
+    const data = await checkResponse<TServerResponse<{}>>(response);
+    if (!data.success) {
+      throw new Error('Не удалось выйти из системы.');
+    }
+    return data;
+  } catch (error) {
+    // Логируем ошибку и пробрасываем её дальше для обработки
+    console.error('Произошла ошибка при выходе:', error);
+    throw error;
+  }
+};
