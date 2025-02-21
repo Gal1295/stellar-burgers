@@ -18,7 +18,10 @@ import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 import { fetchIngredients } from '../../services/slices/ingredientsSlice';
-import { selectIsAuthChecked } from '../../services/slices/userSlice';
+import {
+  selectIsAuthChecked,
+  selectIsAuth
+} from '../../services/slices/userSlice';
 import { checkUserAuth } from '../../services/slices/userThunks';
 import { useDispatch, useSelector } from '../../services/store';
 
@@ -33,15 +36,14 @@ const App: React.FC = () => {
 
   // Проверка авторизации
   const isAuthChecked = useSelector(selectIsAuthChecked);
+  const isAuth = useSelector(selectIsAuth);
 
   // Закрытие модального окна и возврат к предыдущему состоянию
   const closeModal = () => navigate(-1);
 
   useEffect(() => {
-    if (!isAuthChecked) {
-      dispatch(checkUserAuth());
-    }
-  }, [dispatch, isAuthChecked]);
+    dispatch(checkUserAuth());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -147,6 +149,7 @@ const App: React.FC = () => {
               </ProtectedRoute>
             }
           />
+          <Route path='*' element={<NotFound404 />} />
         </Routes>
       )}
     </div>

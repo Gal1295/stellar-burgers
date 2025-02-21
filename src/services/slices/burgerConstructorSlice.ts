@@ -2,6 +2,7 @@ import { TConstructorIngredient, TIngredient, TOrder } from '@utils-types';
 import { orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../services/store';
+import { v4 as uuidv4 } from 'uuid';
 
 // Определение типов для состояния конструктора
 interface ConstructorState {
@@ -57,7 +58,7 @@ const burgerConstructorSlice = createSlice({
       prepare: (ingredient: TIngredient) => ({
         payload: {
           ...ingredient,
-          id: `${ingredient._id}_${Date.now()}` // Генерируем уникальный ID для ингредиента
+          id: uuidv4() // Генерируем уникальный ID с использованием uuidv4
         }
       })
     },

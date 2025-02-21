@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { TOrder } from '@utils-types';
 import { FeedInfoUI } from '../ui/feed-info';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/store';
 import { Preloader } from '@ui';
 import {
   selectIsLoading,

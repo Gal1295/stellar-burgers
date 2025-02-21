@@ -15,7 +15,6 @@ import { RootState } from '../store';
 
 // Определяем структуру состояния для управления данными пользователя
 interface UserState {
-  items: any;
   isAuthChecked: boolean;
   isAuthenticated: boolean;
   user: TUser | null;
@@ -37,8 +36,7 @@ const initialState: UserState = {
   error: null,
   loginUserRequest: false,
   ordersLoading: false,
-  ordersError: null,
-  items: null
+  ordersError: null
 };
 
 // Создаем слайс для управления состоянием пользователя
@@ -81,7 +79,7 @@ const userSlice = createSlice({
         state.loginUserRequest = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.error = action.payload?.message || 'Ошибка при входе';
+        state.error = action.error.message || 'Ошибка при входе';
         state.loginUserRequest = false;
         state.isAuthChecked = true;
       })

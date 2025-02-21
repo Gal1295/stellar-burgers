@@ -20,28 +20,13 @@ export const loginUser = createAsyncThunk<
   TUser,
   TLoginData,
   { rejectValue: { message: string } }
->('user/loginUser', async (data, { rejectWithValue }) => {
-  try {
-    const response = await loginUserApi(data);
+>('user/loginUser', async (data) => {
+  const response = await loginUserApi(data);
 
-    // Сохраняем токены
-    setCookie('accessToken', response.accessToken);
-    localStorage.setItem('refreshToken', response.refreshToken);
-
-    // Проверяем наличие refreshToken
-    const refreshToken = localStorage.getItem('refreshToken');
-    if (refreshToken) {
-      console.log('Refresh token saved:', refreshToken);
-    } else {
-      console.error('Refresh token not found after login');
-    }
-
-    return response.user;
-  } catch (error) {
-    return rejectWithValue({
-      message: error instanceof Error ? error.message : 'Неизвестная ошибка'
-    });
-  }
+  // Сохраняем токены
+  setCookie('accessToken', response.accessToken);
+  localStorage.setItem('refreshToken', response.refreshToken);
+  return response.user;
 });
 
 // Получение данных пользователя
@@ -96,9 +81,7 @@ export const checkUserAuth = createAsyncThunk(
     const token = getCookie('accessToken');
     if (token) {
       await dispatch(getUserData());
-      dispatch(authChecked());
-    } else {
-      dispatch(authChecked());
     }
+    dispatch(authChecked());
   }
 );

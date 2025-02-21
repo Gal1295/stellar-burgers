@@ -11,6 +11,8 @@ import { BurgerConstructorElement, Modal } from '@components';
 import { Preloader, OrderDetailsUI } from '@ui';
 import { getConstructorItems } from '../../../services/slices/burgerConstructorSlice';
 import { useSelector } from '../../../services/store';
+import { useNavigate } from 'react-router-dom';
+import { selectUser } from '../../../services/slices/userSlice'; // Импортируем селектор для проверки авторизации
 
 export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   orderRequest,
@@ -20,6 +22,18 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   closeOrderModal
 }) => {
   const { bun, ingredients } = useSelector(getConstructorItems);
+  const user = useSelector(selectUser); // Получаем информацию о пользователе
+  const navigate = useNavigate();
+
+  // Проверка авторизации перед оформлением заказа
+  const handleOrderClick = () => {
+    if (!user) {
+      // Если пользователь не авторизован, перенаправляем его на страницу логина
+      navigate('/login');
+      return;
+    }
+    onOrderClick(); // Если авторизован, выполняем функцию оформления заказа
+  };
 
   const renderBunElement = (type: 'top' | 'bottom') =>
     bun ? (
@@ -78,7 +92,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
           type='primary'
           size='large'
           children='Оформить заказ'
-          onClick={onOrderClick}
+          onClick={handleOrderClick} // Используем новую функцию для проверки авторизации
         />
       </div>
 

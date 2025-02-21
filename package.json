@@ -21,7 +21,7 @@
     "react-router-dom": "^6.28.0",
     "redux-thunk": "^3.1.0",
     "typescript": "^5.3.3",
-    "uuid": "^9.0.0",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.4",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
@@ -39,7 +39,7 @@
     "@storybook/blocks": "^8.5.8",
     "@storybook/react": "^8.5.8",
     "@storybook/react-webpack5": "^8.5.8",
-    "@storybook/test": "^7.6.10",
+    "@storybook/test": "^8.5.8",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.11",

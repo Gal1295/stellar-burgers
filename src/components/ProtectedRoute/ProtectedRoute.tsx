@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/store';
 import { Preloader } from '@ui';
 import { Navigate, useLocation } from 'react-router-dom';
 import {
   selectUser,
   selectIsAuthChecked
 } from '../../services/slices/userSlice';
-import { useDispatch } from '../../services/store';
 
 // Определяем тип для пропсов компонента ProtectedRoute
 type ProtectedRouteProps = {

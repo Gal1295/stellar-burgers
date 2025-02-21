@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
@@ -8,10 +8,9 @@ import {
   selectIngredients
 } from '../../services/slices/ingredientsSlice';
 import { selectIsLoading, selectError } from '../../services/slices/userSlice';
-import { AppDispatch } from '../../services/store';
 
 export const IngredientDetails: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
 
   // Получаем список ингредиентов из Redux, гарантируя, что это массив
   const ingredients = useSelector(selectIngredients) || [];
