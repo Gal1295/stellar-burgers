@@ -27,7 +27,7 @@ interface UserState {
 }
 
 // Начальное состояние редюсера
-const initialState: UserState = {
+export const initialState: UserState = {
   isAuthChecked: false,
   isAuthenticated: false,
   user: null,
@@ -40,7 +40,7 @@ const initialState: UserState = {
 };
 
 // Создаем слайс для управления состоянием пользователя
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {

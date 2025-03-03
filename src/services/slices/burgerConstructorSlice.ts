@@ -17,7 +17,7 @@ interface ConstructorState {
 }
 
 // Начальное состояние конструктора
-const initialState: ConstructorState = {
+export const initialState: ConstructorState = {
   constructorItems: {
     bun: null,
     ingredients: []
@@ -38,7 +38,7 @@ export const sendOrder = createAsyncThunk(
 );
 
 // Создаем слайс для управления состоянием конструктора
-const burgerConstructorSlice = createSlice({
+export const burgerConstructorSlice = createSlice({
   name: 'burgerconstructor',
   initialState,
   reducers: {
@@ -58,7 +58,7 @@ const burgerConstructorSlice = createSlice({
       prepare: (ingredient: TIngredient) => ({
         payload: {
           ...ingredient,
-          id: uuidv4() // Генерируем уникальный ID с использованием uuidv4
+          id: ingredient._id // Используем _id как id
         }
       })
     },

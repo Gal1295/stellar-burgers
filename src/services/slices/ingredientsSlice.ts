@@ -11,7 +11,7 @@ interface IngredientsState {
 }
 
 // Начальное состояние редюсера
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   items: [],
   loading: false,
   error: null
@@ -32,7 +32,7 @@ export const fetchIngredients = createAsyncThunk<TIngredient[], void>(
 );
 
 // Создаем слайс для управления состоянием ингредиентов
-const ingredientsSlice = createSlice({
+export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {}, // Пустые редюсеры

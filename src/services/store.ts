@@ -11,7 +11,7 @@ import ingredientsReducer from './slices/ingredientsSlice';
 import userReducer from './slices/userSlice';
 
 // Объединяем все редьюсеры в один
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   burgerconstructor: constructorReducer, // Управление состоянием конструктора бургеров
   feed: feedReducer, // Управление данными о заказах
   ingredients: ingredientsReducer, // Управление данными об ингредиентах

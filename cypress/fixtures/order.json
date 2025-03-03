@@ -1,0 +1,64 @@
+{
+    "success": true,
+    "name": "Био-марсианский чикенбургер",
+    "order": {
+        "ingredients": [
+            {
+                "_id": "1",
+                "name": "Краторная булка",
+                "type": "bun",
+                "proteins": 50,
+                "fat": 15,
+                "carbohydrates": 60,
+                "calories": 350,
+                "price": 1150,
+                "image": "https://code.s3.yandex.net/react/code/bun-02.png",
+                "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+                "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
+                "__v": 0
+            },
+            {
+                "_id": "2",
+                "name": "Биокотлета",
+                "type": "main",
+                "proteins": 300,
+                "fat": 100,
+                "carbohydrates": 200,
+                "calories": 2500,
+                "price": 399,
+                "image": "https://code.s3.yandex.net/react/code/meat-01.png",
+                "image_mobile": "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
+                "image_large": "https://code.s3.yandex.net/react/code/meat-01-large.png",
+                "__v": 0
+            },
+            {
+                "_id": "3",
+                "name": "Филе",
+                "type": "main",
+                "proteins": 60,
+                "fat": 35,
+                "carbohydrates": 100,
+                "calories": 800,
+                "price": 1200,
+                "image": "https://code.s3.yandex.net/react/code/meat-03.png",
+                "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
+                "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
+                "__v": 0
+            }
+        ],
+        "_id": "66d1e84b119d45001b50306c",
+        "owner": {
+            "name": "test",
+            "email": "test.email@yandex.ru",
+            "createdAt": "2025-03-01T12:00:00.000Z",
+            "updatedAt": "2025-03-01T12:00:00.000Z"
+        },
+        "status": "done",
+        "name": "Краторный био-марсианский люминесцентный бургер",
+        "createdAt": "2025-03-01T12:00:00.000Z",
+        "updatedAt": "2025-03-01T12:00:00.000Z",
+        "number": 2345666,
+        "price": 3922
+    }
+  }
+  

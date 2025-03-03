@@ -8,7 +8,7 @@ import { getConstructorItems } from '../../services/slices/burgerConstructorSlic
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
   TIngredientsCategoryProps
->(({ title, titleRef, ingredients }, ref) => {
+>(({ title, titleRef, ingredients, ...rest }, ref) => {
   // Извлекаем данные конструктора из Redux
   const { bun, ingredients: constructorIngredients } =
     useSelector(getConstructorItems);
@@ -44,6 +44,7 @@ export const IngredientsCategory = forwardRef<
       ingredients={ingredients}
       ingredientsCounters={ingredientsCounters}
       ref={ref}
+      {...rest}
     />
   );
 });

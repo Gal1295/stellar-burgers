@@ -39,6 +39,9 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
     bun ? (
       <div
         className={`${styles.element} ${type === 'top' ? 'mb-4 mr-4' : 'mt-4 mr-4'}`}
+        data-cy={
+          type === 'top' ? 'top_bun_constructor' : 'bottom_bun_constructor'
+        }
       >
         <ConstructorElement
           type={type}
@@ -50,7 +53,10 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       </div>
     ) : (
       <div
-        className={`${styles.noBuns} ${type === 'top' ? styles.noBunsTop : styles.noBunsBottom} ml-8 mb-4 mr-5 text text_type_main-default`}
+        className={`${styles.noBuns} ${
+          type === 'top' ? styles.noBunsTop : styles.noBunsBottom
+        } ml-8 mb-4 mr-5 text text_type_main-default`}
+        data-cy='placeholder_bun'
       >
         Выберите булки
       </div>
@@ -64,27 +70,32 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
           index={index}
           totalItems={ingredients.length}
           key={item.id}
+          data-cy={`ingredient_element_${item.id}`}
         />
       ));
     } else {
       return (
         <div
           className={`${styles.noBuns} ml-8 mb-4 mr-5 text text_type_main-default`}
+          data-cy='placeholder_ingredients'
         >
           Выберите начинку
         </div>
       );
     }
   };
-
   return (
-    <section className={styles.burger_constructor}>
+    <section className={styles.burger_constructor} data-cy='burger_constructor'>
       {renderBunElement('top')}
-      <ul className={styles.elements}>{renderIngredients()}</ul>
+      <ul className={styles.elements} data-cy='ingredient_list_constructor'>
+        {renderIngredients()}
+      </ul>
       {renderBunElement('bottom')}
-      <div className={`${styles.total} mt-10 mr-4`}>
+      <div className={`${styles.total} mt-10 mr-4`} data-cy='order_summary'>
         <div className={`${styles.cost} mr-10`}>
-          <p className={`text ${styles.text} mr-2`}>{price}</p>
+          <p className={`text ${styles.text} mr-2`} data-cy='total_price'>
+            {price}
+          </p>
           <CurrencyIcon type='primary' />
         </div>
         <Button
@@ -92,12 +103,17 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
           type='primary'
           size='large'
           children='Оформить заказ'
-          onClick={handleOrderClick} // Используем новую функцию для проверки авторизации
+          onClick={handleOrderClick}
+          data-cy='order_button'
         />
       </div>
 
       {orderRequest && (
-        <Modal onClose={closeOrderModal} title={'Оформляем заказ...'}>
+        <Modal
+          onClose={closeOrderModal}
+          title={'Оформляем заказ...'}
+          data-cy='loading_modal'
+        >
           <Preloader />
         </Modal>
       )}
@@ -106,6 +122,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         <Modal
           onClose={closeOrderModal}
           title={orderRequest ? 'Оформляем заказ...' : ''}
+          data-cy='order_details_modal'
         >
           <OrderDetailsUI orderNumber={orderModalData.number} />
         </Modal>

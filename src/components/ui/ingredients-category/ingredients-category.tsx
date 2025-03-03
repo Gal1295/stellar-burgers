@@ -11,7 +11,12 @@ export const IngredientsCategoryUI = forwardRef<
     <h3 className='text text_type_main-medium mt-10 mb-6' ref={titleRef}>
       {title}
     </h3>
-    <ul className={styles.items} ref={ref} {...rest}>
+    <ul
+      className={styles.items}
+      ref={ref}
+      {...rest}
+      //data-cy={`ingredients-category-${title.toLowerCase()}`} // Селектор для всей категории
+    >
       {ingredients.map((ingredient) => (
         <BurgerIngredient
           ingredient={ingredient}

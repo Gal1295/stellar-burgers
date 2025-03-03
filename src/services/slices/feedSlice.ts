@@ -8,7 +8,7 @@ import {
 import { RootState } from '../store';
 
 // Определяем структуру состояния для заказов
-interface FeedState {
+export interface FeedState {
   orders: TOrder[];
   selectedModalOrder: TOrder | null;
   total: number;
@@ -18,7 +18,7 @@ interface FeedState {
 }
 
 // Начальное состояние редюсера
-const initialState: FeedState = {
+export const initialState: FeedState = {
   orders: [],
   selectedModalOrder: null,
   total: 0,
@@ -44,7 +44,7 @@ export const fetchOrderByNumber = createAsyncThunk(
 );
 
 // Создаем слайс для управления состоянием заказов
-const feedSlice = createSlice({
+export const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {
